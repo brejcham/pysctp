@@ -1053,7 +1053,7 @@ class sctpsocket(object):
 		"""
 		_sctp.bindx(self._sk.fileno(), sockaddrs, action)
 
-	def connectx(self, sockaddrs):
+	def connectx(self, sockaddrs, assoc_id=None):
 		"""
 		Connects to a remote peer. It works like standard connect(), but accepts
 		a list of address/port pairs, in order to support the SCTP multihoming
@@ -1067,7 +1067,7 @@ class sctpsocket(object):
 		if not supported.
 		"""
 		if _sctp.__dict__.has_key("connectx"):
-			_sctp.connectx(self._sk.fileno(), sockaddrs)
+			_sctp.connectx(self._sk.fileno(), sockaddrs, assoc_id)
 		else:
 			raise RuntimeError("Underlying SCTP implementation does not have connectx()")
 
